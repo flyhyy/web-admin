@@ -6,7 +6,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'index',
-      component: PageIndex
+      component: PageIndex,
+      meta:{
+        icon:'Document'
+      }
     },
     // {
     //   path: '/about',
