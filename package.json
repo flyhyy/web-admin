@@ -12,6 +12,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
     "element-plus": "^2.2.21",
+    "lodash": "^4.17.21",
     "mavon-editor": "^3.0.0-beta",
     "pinia": "^2.0.23",
     "vue": "^3.2.41",
