@@ -1,0 +1,79 @@
+
+.height--100-pr{
+    height: 100%;
+  }
+  .over-flow{
+    /* overflow: auto; */
+    overflow-y: overlay;
+  
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+    max-width: 6px;
+    min-width: 6px;
+    /* height: 10px; */
+  } 
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color:  #409EFF;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+   
+  .text-font-size--extra-small{
+    font-size:var(--el-font-size-extra-small)  ;
+  }
+  .text-font-size--small{
+    font-size:var(--el-font-size-small)  ;
+  }
+  .text-font-size--base{
+    font-size:var(--el-font-size-base)  ;
+  }
+  .text-font-size--medium{
+    font-size:var(--el-font-size-medium)  ;
+  }
+  .text-font-size--large{
+    font-size:var(--el-font-size-large)  ;
+  }
+  .text-font-size--extra-large{
+    font-size:var(--el-font-size-extra-large)  ;
+  }
+
+  .text-align-right{
+    text-align: right;
+  }
+  .text-align-center{
+    text-align: center;
+  }
+  .text-align-left{
+    text-align: left;
+  }
+  
+  .text--style-overflow{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .text--style-color__primary{
+    color: #303133;
+  }
+  .text--style-color__regular{
+    color: #606266;
+  }
+  .text--style-color__secondary{
+    color: #909399;
+  }
+  .text--style-color__placeholder{
+    color: #A8ABB2;
+  }
+  .text--style-color__disabled{
+    color: #C0C4CC;
+  }
+  
+  .border-top__solid{
+    border-top:1px solid  var(--el-border-color);
+  }
+  .border-bottom__solid{
+    border-bottom:1px solid  var(--el-border-color);
+  }
