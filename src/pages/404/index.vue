@@ -6,7 +6,21 @@
       />
     </template>
     <template #extra>
-      <el-button type="primary">Back</el-button>
+      <el-button type="primary" @click="onBack">Back</el-button>
     </template>
   </el-result>
 </template>
+
+<script setup>
+import { useRouter } from 'vue-router';
+
+
+const router = useRouter()
+
+const onBack = ()=>{
+
+  router.replace('/login')
+}
+
+
+</script>
