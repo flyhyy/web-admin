@@ -48,15 +48,10 @@ const onLogin = () => {
     setTimeout(() => {
       loadingLoginButton.value = false;
       //  添加路由配置
-      for (let i of LoginInRoutes) {
-        UseRouter.addRoute(i);
-      }
+     
 
-      console.log(
-        "打印----> ~ file: index.vue ~ line 54 ~ setTimeout ~ router.currentRoute.value.fullPath",
-        UseRouter.currentRoute.value.fullPath
-      );
-      UseRouter.replace("/index");
+       
+      UseRouter.replace({name:'index'})
 
       console.log(UseRouter.getRoutes());
       UseLoginInfoStore.setLoginData({
