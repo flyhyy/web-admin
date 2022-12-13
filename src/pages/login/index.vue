@@ -21,11 +21,10 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { LoginInRoutes } from "../../router/router.js";
 import { useLoginInfoStore } from "../../stores/login";
-
-const UseRouter = useRouter();
-
+import { login } from './api'
+import md5 from 'js-md5'
+const router = useRouter();
 const UseLoginInfoStore = useLoginInfoStore();
 let loadingLoginButton = ref(false);
 
@@ -41,27 +40,24 @@ let formData = reactive({
 });
 const onLogin = () => {
   console.log(formRef);
-  formRef.value.validate((valid) => {
-    console.log(valid);
+
+  formRef.value.validate(async (valid) => {
     loadingLoginButton.value = true;
-
-    setTimeout(() => {
-      loadingLoginButton.value = false;
-      //  添加路由配置
-     
-
-       
-      UseRouter.replace({name:'index'})
-
-      console.log(UseRouter.getRoutes());
-      UseLoginInfoStore.setLoginData({
-        token: "token",
-        userId: 1,
-        loginTime: "2022-11-17 12:00:30",
-        userName: "MrHuang",
-        avatar: "",
+    if (valid) {
+      let data = await login({
+        account: formData.account,
+        password: md5(formData.password)
       })
-    }, 1000);
+      loadingLoginButton.value = false;
+      router.replace({
+        path: '/index'
+      })
+      UseLoginInfoStore.setLoginData(data)
+    
+    } else {
+      loadingLoginButton.value = false;
+
+    }
   });
 };
 </script>
@@ -72,6 +68,7 @@ const onLogin = () => {
   top: 50%;
   left: 45%;
 }
+
 .login-wrapper {
   position: relative;
 }
