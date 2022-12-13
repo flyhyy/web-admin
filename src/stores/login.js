@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, reactive, toRefs } from "vue";
+import { setToken } from "../utils/auth";
 import _ from 'lodash';
-import  router, {addRouter} from '../router/index'
 
 export const useLoginInfoStore = defineStore('useLoginInfoStore', () => {
     
@@ -11,21 +11,14 @@ export const useLoginInfoStore = defineStore('useLoginInfoStore', () => {
 
     function setLoginData(data) {
         if(data?.token){
-            state.loginInfo = data
-            addRouter()
-            sessionStorage.setItem('loginInfo',JSON.stringify(data))
-        }else {
-            let storageLoginInfo =  JSON.parse(sessionStorage.getItem('loginInfo'))
-            if(storageLoginInfo?.token){
-                setLoginData(storageLoginInfo)
-            }else{
-                setLoginData({})
-            }
-        }
-    }
-    
-    const  LoginData = computed(()=>{ 
-        return     state.loginInfo 
+            setToken(data.token)
+            state.loginInfo = data 
+        }else{
+            state.loginInfo = {}
+        } 
+    } 
+    const  LoginData = computed(()=>{  
+        return state.loginInfo
     })
 
     return {
