@@ -43,10 +43,13 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/login') {
       next()
     } else {
-      if (isAdd) {
+      if (useLoginInfoStore().Routes.length) {
         next()
       } else {
-        addRouter()
+        // addRouter()
+        useLoginInfoStore().setAddRoutes()
+        
+
         next({ ...to, replace: true })
       }
     }
