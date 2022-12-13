@@ -9,13 +9,17 @@ export const LoginSuccessedRoutes = [
         name: "index",
         component: Layout,
         redirect:'/index/home', 
+        meta:{
+            title:'首页',
+            icon:''
+        },
         children: [{
             path: 'home',
             name: 'home',
             component: ()=> import('../pages/index/index.vue'),
             meta: {
                 icon: 'Document',
-                title: '首页'
+                title: '文档'
             }
         },
         {
