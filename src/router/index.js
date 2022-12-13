@@ -4,8 +4,8 @@ import { storeToRefs } from 'pinia'
 import PageLogin from '../pages/login/index.vue'
 import PageNotFound from '../pages/404/index.vue'
 import { useLoginInfoStore } from '../stores/login'
-import { LoginInRoutes } from './router'
-
+import { LoginSuccessedRoutes } from './router'
+import { getToken } from '../utils/auth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,51 +17,46 @@ const router = createRouter({
       component: PageLogin
     },
 
-    {
-      path: '/:pathMatch(.*)*',
-      name: 'NotFound',
-      component: PageNotFound,
-
-    }
-
     // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue')
-    // }
+    //   path: '/:pathMatch(.*)*',
+    //   name: 'NotFound',
+    //   component: PageNotFound,
+    // },
   ]
+
 })
 
-export function addRouter() {
-  for (let i of LoginInRoutes) {
+
+const whiteRouterList = ['/login',]
+
+let isAdd = false
+function addRouter() {
+  for (let i of LoginSuccessedRoutes) {
     router.addRoute(i);
   }
+  isAdd = true
 }
 
-router.beforeEach((to, from,next) => {
-
-  
-  let loginStore = useLoginInfoStore()
-  let { token } = loginStore.LoginData
-  console.log(`[log] >>>>>>>>>> ~ router.beforeEach ~ to`, to)
-  if (token) {
+router.beforeEach((to, from, next) => {
+  const hasToken = getToken() 
+  if (hasToken) {
     if (to.path === '/login') {
       next()
     } else {
-      addRouter() 
-      next()
+      if (isAdd) {
+        next()
+      } else {
+        addRouter()
+        next({ ...to, replace: true })
+      }
     }
   } else {
-    next()
-    // next('/login')
+    if (whiteRouterList.indexOf(to.path) != -1) {
+      next()
+    } else {
+      next('/login')
+    }
   }
-
-
- 
-
 
 })
 
