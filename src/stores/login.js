@@ -13,7 +13,10 @@ export const useLoginInfoStore = defineStore('useLoginInfoStore', () => {
         loginInfo: {},
         routes:[]
     })
-
+    /**
+     * 设置登陆参数
+     * @param {*} data 
+     */
     function setLoginData(data) {
         if(data?.token){
             setToken(data.token)
