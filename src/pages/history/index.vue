@@ -48,7 +48,6 @@ let formData = reactive({
     imgs: []
 })
 const onSubmit = function () {
-    console.log(formData, 'onSubmit');
     refForm.value.validate(async (valid) => {
         if (valid) {
             let data = await uploadFiles(formData.imgs)
@@ -64,7 +63,6 @@ const onSubmit = function () {
             })
             
             refForm.value.resetFields()
-            console.log(`[打印] ~ refForm`, refForm)
             
         }
     })
