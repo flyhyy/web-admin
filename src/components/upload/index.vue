@@ -3,9 +3,9 @@
   <el-upload
     action="#"
     list-type="picture-card"
-    :auto-upload="false"
-    :before-remove="onRemove"
-    v-model:file-list="fileList"
+    :auto-upload="false" 
+    v-model:file-list="FileList"
+    :on-change="onChange"
   >
     <el-icon><Plus /></el-icon>
 
@@ -29,29 +29,29 @@
 </template>
 
 <script setup>
-import { findIndex } from "lodash";
-import { reactive, ref, watch } from "vue";
-let props = defineProps({
-  list: {
-    default: () => [],
-  },
+import { findIndex, set } from "lodash";
+import { reactive, ref, watch,computed } from "vue";
+const props = defineProps({
+  fileList:{
+    default:()=>[]
+  }, 
 });
-let emits = defineEmits(["update:list"]);
-let fileList = ref([]);
+const emits = defineEmits(["update:fileList",'update:modelValue']); 
 
-const onRemove = function (file, files) {
-  // console.log(file,files);
-};
-
-watch(
-  fileList,
-  (nv, ov) => {
-    console.log(nv, ov)
-    let  files = nv.map((item)=> item.raw)
-    emits("update:list", files);
+const FileList = computed({
+  get(){
+    return props.fileList
   },
-  {
-    deep: true,
+  set(value){
+    
+    emits('update:fileList',value)
   }
-);
+})
+
+const onChange = (file,files)=>{
+  // emits('update:modelValue',files)
+
+}
+
+ 
 </script>
