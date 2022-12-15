@@ -31,6 +31,26 @@ export const LoginSuccessedRoutes = [
                 title: '历史'
             }
         },]
-    },
+    },{
+        path: '/setting',
+        name: "setting",
+        component: Layout,
+        redirect:'/setting/index', 
+        meta:{
+            title:'设置',
+            icon:''
+        },
+        children:[{
+            path:'index',
+            name:"seetingIndex",
+            component:()=>import('../pages/setting/index.vue'),
+            meta:{
+                icon:"Setting",
+                title:"历史密码设置"
+            }
+            
+        }]
+    }
+
 
 ]
